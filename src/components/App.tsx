@@ -161,7 +161,7 @@ function App() {
     >
       <>
         <Heading size="xl" color="#3d2900" paddingTop={2} paddingBottom={8}>
-          ドトール1000円ガチャ
+          ドトール1000円ガチャ Test
         </Heading>
 
         <Button colorScheme="yellow" shadow="md" onClick={handleTurnGacha}>
