@@ -17,17 +17,20 @@ import {
   VStack,
 } from "@chakra-ui/react";
 
-import * as menusData from "../apis/menus";
 import { Menu } from "../model/Menu";
 
+import { db } from "../libs/Firebase";
+import { collection, getDocs } from "firebase/firestore";
+
 function App() {
+  const [menuList, setMenuList] = useState<Menu[]>([]);
+
   useEffect(() => {
-    menusData.getAllMenus().then((menus: Menu[]) => {
-      setMenuList(menus);
+    const usersCollectionRef = collection(db, "menus") as any;
+    getDocs(usersCollectionRef).then((querySnapshot) => {
+      setMenuList(querySnapshot.docs.map((doc: any) => doc.data()));
     });
   }, []);
-
-  const [menuList, setMenuList] = useState<Menu[]>([]);
 
   const [singleMenuGachaList, setSingleMenuGachaList] = useState<Menu[]>([]);
   const [mealMenuGachaList, setMealMenuGachaList] = useState<Menu[][]>([]);
