@@ -1,0 +1,49 @@
+{
+  "todos": [
+    {
+      "content": "test",
+      "id": "01GQ3XECWQJDBYSEQ678GNJNGX",
+      "done": true
+    },
+    {
+      "content": "test2",
+      "id": "01GQ3XEEXVNV0M70574T7MZP3G",
+      "done": false
+    }
+  ],
+
+  "menus": [
+    {
+      "id": "1",
+      "category": "hotdrink",
+      "name": "ブレンドコーヒー",
+      "size": "S",
+      "isDiscounted": false,
+      "price": 150
+    },
+    {
+      "id": "2",
+      "category": "hotdrink",
+      "name": "ブレンドコーヒー",
+      "size": "M",
+      "isDiscounted": false,
+      "price": 200
+    },
+    {
+      "id": "3",
+      "category": "milano",
+      "name": "ミラノサンドA 生ハム・ボンレスハム・ボローニャソーセージ",
+      "price": 350,
+      "isDiscounted": false,
+      "drinkDiscount": 50
+    },
+    {
+      "id": "4",
+      "category": "milano",
+      "name": "ミラノサンドB エビ・サーモン・カマンベール",
+      "price": 400,
+      "isDiscounted": false,
+      "drinkDiscount": 50
+    }
+  ]
+}
