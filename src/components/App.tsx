@@ -21,6 +21,7 @@ import { Menu } from "../model/Menu";
 
 import { db } from "../libs/Firebase";
 import { collection, getDocs } from "firebase/firestore";
+import { MenuItem } from "./MenuItem";
 
 function App() {
   const [menuList, setMenuList] = useState<Menu[]>([]);
@@ -164,56 +165,34 @@ function App() {
     >
       <>
         <Heading size="xl" color="#3d2900" paddingTop={2} paddingBottom={8}>
-          ドトール1000円ガチャ Test
+          ドトール1000円ガチャ
         </Heading>
 
         <Button colorScheme="yellow" shadow="md" onClick={handleTurnGacha}>
           ガチャを回す
         </Button>
+
         {[...mealMenuGachaList, ...singleMenuGachaList].length > 0 && (
           <Text fontWeight={"bold"} paddingTop={5}>
             合計：{totalPrice}円
           </Text>
         )}
+
         <List w="lg">
-          {mealMenuGachaList.map((menus: Menu[]) => (
+          {mealMenuGachaList.map((menus: Menu[], index: number) => (
             <Box
+              key={index}
               bg="yellow.100"
               borderColor={"black"}
               p={4}
               m={4}
               borderRadius="md"
             >
-              <Text fontSize="lg" color="gray.700" fontWeight={"bold"}>
+              <Text fontSize="lg" color="black" fontWeight={"bold"}>
                 セット {menus[0].drinkDiscount}円引き！
               </Text>
               {menus.map((menu: Menu) => (
-                <ListItem
-                  key={menu.uuid}
-                  borderWidth="1px"
-                  p="4"
-                  mt="4"
-                  borderRadius="md"
-                  backgroundColor={"gray.100"}
-                  shadow="md"
-                >
-                  <Stack>
-                    <Center>
-                      <VStack>
-                        <Text color="#3d2900" fontWeight={"bold"} fontSize="md">
-                          {menu.name}
-                        </Text>
-                        <Text
-                          fontSize="md"
-                          color={"gray.600"}
-                          fontWeight={"bold"}
-                        >
-                          {menu.price}円
-                        </Text>
-                      </VStack>
-                    </Center>
-                  </Stack>
-                </ListItem>
+                <MenuItem key={menu.uuid} menu={menu} />
               ))}
             </Box>
           ))}
@@ -222,13 +201,10 @@ function App() {
           {singleMenuGachaList.length !== 0 && (
             <List w="lg">
               <Box
-                // bg="#fbd24d"
                 paddingLeft={4}
                 paddingRight={4}
                 paddingBottom={4}
                 paddingTop={2}
-                // p={4}
-                // m={4}
                 marginLeft={4}
                 marginRight={4}
                 marginBottom={4}
@@ -237,37 +213,7 @@ function App() {
                   単品
                 </Text>
                 {singleMenuGachaList.map((menu: Menu) => (
-                  <ListItem
-                    key={menu.uuid}
-                    borderWidth="1px"
-                    p="4"
-                    mt="4"
-                    // bg="white"
-                    borderRadius="md"
-                    backgroundColor={"gray.100"}
-                    shadow="md"
-                  >
-                    <Stack>
-                      <Center>
-                        <VStack>
-                          <Text
-                            color="#3d2900"
-                            fontWeight={"bold"}
-                            fontSize="md"
-                          >
-                            {menu.name}
-                          </Text>
-                          <Text
-                            fontSize="md"
-                            color={"gray.600"}
-                            fontWeight={"bold"}
-                          >
-                            {menu.price}円
-                          </Text>
-                        </VStack>
-                      </Center>
-                    </Stack>
-                  </ListItem>
+                  <MenuItem key={menu.uuid} menu={menu} />
                 ))}
               </Box>
             </List>
