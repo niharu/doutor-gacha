@@ -1,4 +1,11 @@
-import { Center, Stack, Text, VStack, ListItem } from "@chakra-ui/react";
+import {
+  Center,
+  Stack,
+  Text,
+  VStack,
+  ListItem,
+  HStack,
+} from "@chakra-ui/react";
 import { Menu } from "../model/Menu";
 
 type Props = {
@@ -19,9 +26,16 @@ export const MenuItem = ({ menu }: Props) => {
         <Stack>
           <Center>
             <VStack>
-              <Text color="#3d2900" fontWeight={"bold"} fontSize="md">
-                {menu.name}
-              </Text>
+              <HStack>
+                <Text color="#3d2900" fontWeight={"bold"} fontSize="md">
+                  {menu.name}
+                </Text>
+                {menu.size && (
+                  <Text color="#3d2900" fontWeight={"bold"} fontSize="md">
+                    （{menu.size}）
+                  </Text>
+                )}
+              </HStack>
               <Text fontSize="md" color="#3d2900" fontWeight={"bold"}>
                 {menu.price}円
               </Text>
