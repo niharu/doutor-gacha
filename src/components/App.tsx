@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import * as lodash from "lodash";
 
@@ -11,10 +11,7 @@ import {
   Container,
   Heading,
   List,
-  ListItem,
-  Stack,
   Text,
-  VStack,
 } from "@chakra-ui/react";
 
 import { Menu } from "../model/Menu";
@@ -164,19 +161,18 @@ function App() {
       bg="white"
     >
       <>
-        <Heading size="xl" color="#3d2900" paddingTop={2} paddingBottom={8}>
+        <Heading size="xl" color="#3d2900" paddingBottom={6}>
           ドトール1000円ガチャ
         </Heading>
 
-        <Button colorScheme="yellow" shadow="md" onClick={handleTurnGacha}>
+        <Button
+          colorScheme="yellow"
+          shadow="md"
+          mb={2}
+          onClick={handleTurnGacha}
+        >
           ガチャを回す
         </Button>
-
-        {[...mealMenuGachaList, ...singleMenuGachaList].length > 0 && (
-          <Text fontWeight={"bold"} paddingTop={5}>
-            合計：{totalPrice}円
-          </Text>
-        )}
 
         <List w="lg">
           {mealMenuGachaList.map((menus: Menu[], index: number) => (
@@ -184,13 +180,21 @@ function App() {
               key={index}
               bg="yellow.100"
               borderColor={"black"}
-              p={4}
-              m={4}
+              paddingTop={4}
+              paddingBottom={4}
+              paddingLeft={4}
+              paddingRight={4}
+              marginTop={4}
+              marginBottom={0}
+              marginLeft={4}
+              marginRight={4}
               borderRadius="md"
             >
-              <Text fontSize="lg" color="black" fontWeight={"bold"}>
-                セット {menus[0].drinkDiscount}円引き！
-              </Text>
+              <Center>
+                <Text fontSize="lg" color="black" fontWeight={"bold"}>
+                  セット {menus[0].drinkDiscount}円引き！
+                </Text>
+              </Center>
               {menus.map((menu: Menu) => (
                 <MenuItem key={menu.uuid} menu={menu} />
               ))}
@@ -201,17 +205,20 @@ function App() {
           {singleMenuGachaList.length !== 0 && (
             <List w="lg">
               <Box
+                // paddingTop={2}
+                paddingBottom={4}
                 paddingLeft={4}
                 paddingRight={4}
-                paddingBottom={4}
-                paddingTop={2}
+                marginTop={4}
+                marginBottom={0}
                 marginLeft={4}
                 marginRight={4}
-                marginBottom={4}
               >
-                <Text fontSize="lg" color="black" fontWeight={"bold"}>
-                  単品
-                </Text>
+                {/* <Center>
+                  <Text fontSize="lg" color="black" fontWeight={"bold"}>
+                    単品
+                  </Text>
+                </Center> */}
                 {singleMenuGachaList.map((menu: Menu) => (
                   <MenuItem key={menu.uuid} menu={menu} />
                 ))}
@@ -219,6 +226,15 @@ function App() {
             </List>
           )}
         </>
+        {[...mealMenuGachaList, ...singleMenuGachaList].length > 0 && (
+          <Box w="md" bg="#7a5200" p={1} mt={4} borderRadius="md">
+            <Center>
+              <Text color="white" fontWeight={"bold"}>
+                合計：{totalPrice}円
+              </Text>
+            </Center>
+          </Box>
+        )}
       </>
     </Container>
   );
