@@ -10,8 +10,9 @@ import {
   Center,
   Container,
   Heading,
-  List,
   Text,
+  Stack,
+  VStack,
 } from "@chakra-ui/react";
 
 import { Menu } from "../model/Menu";
@@ -155,80 +156,49 @@ function Home() {
   };
 
   return (
-    <Container
-      centerContent
-      p={{ base: "4", md: "6" }}
-      maxWidth="lg"
-      bg="white"
-    >
-      <>
-        <Heading size="xl" color="#3d2900" paddingBottom={6}>
+    <Container centerContent bg="white" p={{ base: "2", md: "4" }}>
+      <VStack>
+        <Heading size="xl" color="#3d2900" mb={3}>
           ドトール1000円ガチャ
         </Heading>
-
-        <Button
-          colorScheme="yellow"
-          shadow="md"
-          mb={2}
-          onClick={handleTurnGacha}
-        >
+        <Button colorScheme="yellow" shadow="md" onClick={handleTurnGacha}>
           ガチャを回す
         </Button>
 
-        <List w="lg">
-          {mealMenuGachaList.map((menus: Menu[], index: number) => (
-            <Box
-              key={index}
-              bg="yellow.100"
-              borderColor={"black"}
-              paddingTop={4}
-              paddingBottom={4}
-              paddingLeft={4}
-              paddingRight={4}
-              marginTop={4}
-              marginBottom={0}
-              marginLeft={4}
-              marginRight={4}
-              borderRadius="md"
-            >
-              <Center>
-                <Text fontSize="lg" color="black" fontWeight={"bold"}>
-                  セット {menus[0].drinkDiscount}円引き！
-                </Text>
-              </Center>
+        {/* セットメニュー */}
+        {mealMenuGachaList.map((menus: Menu[], index: number) => (
+          <Box
+            key={index}
+            bg="yellow.100"
+            borderColor={"black"}
+            borderRadius="md"
+            p={2}
+          >
+            <Center>
+              <Text mb={2} fontSize="lg" color="black" fontWeight={"bold"}>
+                セット {menus[0].drinkDiscount}円引き！
+              </Text>
+            </Center>
+            <Stack>
               {menus.map((menu: Menu) => (
                 <MenuItem key={menu.uuid} menu={menu} />
               ))}
-            </Box>
-          ))}
-        </List>
-        <>
-          {singleMenuGachaList.length !== 0 && (
-            <List w="lg">
-              <Box
-                // paddingTop={2}
-                paddingBottom={4}
-                paddingLeft={4}
-                paddingRight={4}
-                marginTop={4}
-                marginBottom={0}
-                marginLeft={4}
-                marginRight={4}
-              >
-                {/* <Center>
-                  <Text fontSize="lg" color="black" fontWeight={"bold"}>
-                    単品
-                  </Text>
-                </Center> */}
-                {singleMenuGachaList.map((menu: Menu) => (
-                  <MenuItem key={menu.uuid} menu={menu} />
-                ))}
-              </Box>
-            </List>
-          )}
-        </>
+            </Stack>
+          </Box>
+        ))}
+
+        {/* 単品メニュー */}
+        {singleMenuGachaList.length !== 0 && (
+          <Stack>
+            {singleMenuGachaList.map((menu: Menu) => (
+              <MenuItem key={menu.uuid} menu={menu} />
+            ))}
+          </Stack>
+        )}
+
+        {/* 合計金額 */}
         {[...mealMenuGachaList, ...singleMenuGachaList].length > 0 && (
-          <Box w="md" bg="#7a5200" p={1} mt={4} borderRadius="md">
+          <Box w="sm" bg="#7a5200" borderRadius="md">
             <Center>
               <Text color="white" fontWeight={"bold"}>
                 合計：{totalPrice}円
@@ -236,13 +206,13 @@ function Home() {
             </Center>
           </Box>
         )}
-      </>
 
-      <Center mt={3}>
         <Link to="/about">
-          <Text as="u">About</Text>
+          <Center>
+            <Text as="u">About</Text>
+          </Center>
         </Link>
-      </Center>
+      </VStack>
     </Container>
   );
 }
