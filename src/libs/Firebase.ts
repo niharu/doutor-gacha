@@ -15,7 +15,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 export const db = getFirestore();
-console.log("db:", firebaseConfig.apiKey);
 export const storage = getStorage();
 
 export default app;
